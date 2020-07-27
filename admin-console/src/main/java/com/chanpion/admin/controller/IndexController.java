@@ -19,4 +19,9 @@ public class IndexController {
     public String start() {
         return "starter";
     }
+
+    @GetMapping("/table")
+    public String table(){
+        return "table";
+    }
 }
