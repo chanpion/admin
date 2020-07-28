@@ -10,6 +10,7 @@
 
     <modules>
         <module>admin-console</module>
+        <module>admin-system</module>
     </modules>
 
     <properties>
