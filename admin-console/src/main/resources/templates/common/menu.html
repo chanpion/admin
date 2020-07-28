@@ -1,0 +1,30 @@
+<#list menus as menu>
+    <li id="menu-item-${menu.menuId}"
+        class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="${(menu.menuUrl)!}">
+            <i class="${(menu.menuIcon)!}"></i>
+            <span class="font-text">${(menu.menuName)!}</span>
+        </a>
+        <ul class="sub-menu">
+            <#list menu.childMenus as menu2>
+            <li id="menu-item-${menu2.menuId}"
+                class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a href="${(menu2.menuUrl)!}">
+                    <i class="${(menu2.menuIcon)!}"></i>
+                    <span class="font-text">${(menu2.menuName)!}</span>
+                </a>
+                <ul class="sub-menu">
+                    <#list menu2.childMenus?if_exists as menu3>
+                    <li id="menu-item-${menu3.menuId}"
+                        class="menu-item menu-item-type-custom menu-item-object-custom">
+                        <a href="${(menu2.menuIcon)!}"">
+                        <span class="font-text">${(menu3.menuName)!}</span>
+                        </a>
+                    </li>
+                </#list>
+        </ul>
+    </li>
+</#list>
+</ul>
+</li>
+</#list>
