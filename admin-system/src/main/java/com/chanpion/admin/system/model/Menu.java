@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Menu {
     private Long id;
-    private String title;
+    private String name;
     private String url;
     private String icon;
 
@@ -20,7 +20,7 @@ public class Menu {
     public Menu() {
     }
 
-    public Menu(String title) {
-        this.title = title;
+    public Menu(String name) {
+        this.name = name;
     }
 }
