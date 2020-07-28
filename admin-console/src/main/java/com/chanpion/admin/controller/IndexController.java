@@ -24,6 +24,7 @@ public class IndexController {
         user.setImage("dist/img/user2-160x160.jpg");
         model.addAttribute("user", user);
 
+        Menu mainMenu = new Menu("菜单");
         List<Menu> menus = new ArrayList<>();
         List<Menu> children = new ArrayList<>();
         children.add(new Menu("菜单管理"));
@@ -31,7 +32,10 @@ public class IndexController {
         children.add(new Menu("权限管理"));
         Menu menu = new Menu("系统管理");
         menu.setChildren(children);
+        mainMenu.setChildren(menus);
+        model.addAttribute("menu", menu);
         model.addAttribute("menus", menus);
+        model.addAttribute("menuTree", mainMenu);
         return "index";
     }
 

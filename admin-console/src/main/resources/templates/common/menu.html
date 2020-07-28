@@ -27,7 +27,8 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 <!--            <#if menus??>-->
-                <#list menus as menu>
+                <li class="nav-header">${menuTree.name}</li>
+                <#list menuTree.children as menu>
                     <li class="nav-header">${menu.name}</li>
 <!--                    <li class="nav-item has-treeview menu-open">-->
 <!--                        <a href="#" class="nav-link active">-->
