@@ -5,3 +5,5 @@ spring:
     name: admin
   freemarker:
     suffix: .html
+    settings:
+      classic_compatible: true

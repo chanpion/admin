@@ -26,22 +26,29 @@
 
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-<!--            <#if menus??>-->
-                <li class="nav-header">${menuTree.name}</li>
-                <#list menuTree.children as menu>
-                    <li class="nav-header">${menu.name}</li>
-<!--                    <li class="nav-item has-treeview menu-open">-->
-<!--                        <a href="#" class="nav-link active">-->
-<!--                            <i class="nav-icon fas ${(menu.icon)!}"></i>-->
-<!--                            <i class="nav-icon fas fa-tachometer-alt"></i>-->
-<!--                            <p>-->
-<!--                                ${(menu.name)!}-->
-<!--                                <i class="right fas fa-angle-left"></i>-->
-<!--                            </p>-->
-<!--                        </a>-->
-<!--                    </li>-->
+            <#if menus??>
+                <#list menus as menu>
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                ${(menu.name)!}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <#list menu.children as child>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">
+                                    <i class="far fa-circle nav-icon active"></i>
+                                    <p>${(child.name)!}</p>
+                                </a>
+                            </li>
+                            </#list>
+                        </ul>
+                    </li>
                 </#list>
-<!--            </#if>-->
+            </#if>
 
             <li class="nav-header">个人中心</li>
             <li class="nav-item">

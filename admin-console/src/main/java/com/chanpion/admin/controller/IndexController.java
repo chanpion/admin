@@ -5,7 +5,6 @@ import com.chanpion.admin.system.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +23,22 @@ public class IndexController {
         user.setImage("dist/img/user2-160x160.jpg");
         model.addAttribute("user", user);
 
-        Menu mainMenu = new Menu("菜单");
-        List<Menu> menus = new ArrayList<>();
+
+        Menu menuTree = new Menu("菜单");
+
+        Menu systemMenu = new Menu("系统管理");
         List<Menu> children = new ArrayList<>();
         children.add(new Menu("菜单管理"));
         children.add(new Menu("用户管理"));
         children.add(new Menu("权限管理"));
-        Menu menu = new Menu("系统管理");
-        menu.setChildren(children);
-        mainMenu.setChildren(menus);
-        model.addAttribute("menu", menu);
+        systemMenu.setChildren(children);
+
+        List<Menu> menus = new ArrayList<>();
+        menus.add(systemMenu);
+        menuTree.setChildren(menus);
+
         model.addAttribute("menus", menus);
-        model.addAttribute("menuTree", mainMenu);
+        model.addAttribute("menuTree", menuTree);
         return "index";
     }
 
