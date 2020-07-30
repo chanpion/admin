@@ -1,4 +1,4 @@
-package com.chanpion.admin.system.model;
+package com.chanpion.admin.system.entity;
 
 import lombok.Data;
 
@@ -14,7 +14,8 @@ public class Menu {
     private String name;
     private String url;
     private String icon;
-    private int order;
+    private int orderNumber;
+    private Long pid;
 
     private List<Menu> children;
 

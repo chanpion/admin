@@ -1,4 +1,4 @@
-package com.chanpion.admin.system.model;
+package com.chanpion.admin.system.entity;
 
 import lombok.Data;
 

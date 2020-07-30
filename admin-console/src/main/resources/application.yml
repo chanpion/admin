@@ -3,7 +3,22 @@ server:
 spring:
   application:
     name: admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.19.80.206:3305/test?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: dialog
+    password: dialog
   freemarker:
     suffix: .html
     settings:
       classic_compatible: true
+
+logging:
+  level:
+    com.chanpion.admin.system.dao: debug
+
+mybatis:
+  type-aliases-package: com.chanpion.admin.system.entity
+  mapper-locations: classpath:mybatis/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
