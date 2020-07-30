@@ -37,7 +37,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
             Menu menuTree = new Menu("菜单");
             Menu systemMenu = new Menu("系统管理");
             List<Menu> children = new ArrayList<>();
-            children.add(new Menu("菜单管理"));
+            children.add(new Menu("菜单管理","/menu"));
             children.add(new Menu("用户管理"));
             children.add(new Menu("权限管理"));
             systemMenu.setChildren(children);

@@ -3,11 +3,57 @@
 <head>
     <title>Admin | 菜单管理</title>
     <#include "/common/head.html">
+    <link rel="stylesheet" href="ztree/css/zTreeStyle/zTreeStyle.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <table id="menuTable" class="table table-bordered table-striped">
-    </table>
+    <#include "/common/navbar.html">
+    <#include "/common/menu.html">
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">菜单管理</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">设置</a></li>
+                            <li class="breadcrumb-item active">菜单管理</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="menuTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名称</th>
+                                <th>URL</th>
+                                <th>图标</th>
+                                <th>序号</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <ul id="tree" class="ztree"></ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
 </div>
 
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -19,6 +65,8 @@
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="layui/layui.js"></script>
+<script src="ztree/js/jquery.ztree.all.js"></script>
 <script>
     $(function () {
         $("#menuTable").DataTable({
@@ -29,8 +77,39 @@
             "info": true,
             "responsive": true,
             "autoWidth": false,
+            "ajax": {
+                "url": "/menu/all",
+                "dataType": "json",
+                "type": "POST",
+                "dataSrc": function (result) {
+                    return result;
+                }
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "url"},
+                {"data": "icon"},
+                {"data": "orderNumber"}
+            ]
         });
     });
 </script>
+<script>
+    var zTreeObj;
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var setting = {};
+    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+    var zNodes = [
+        {name:"test1", open:true, children:[
+                {name:"test1_1"}, {name:"test1_2"}]},
+        {name:"test2", open:true, children:[
+                {name:"test2_1"}, {name:"test2_2"}]}
+    ];
+    $(document).ready(function(){
+        zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes);
+    });
+</script>
+
 </body>
 </html>

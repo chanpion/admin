@@ -21,6 +21,11 @@ public class MenuController {
     @Resource
     private MenuService menuService;
 
+    @GetMapping
+    public String menu() {
+        return "system/menu";
+    }
+
     @GetMapping("/tree")
     public void tree() {
         List<Menu> menus = new ArrayList<>();

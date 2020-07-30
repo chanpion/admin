@@ -30,7 +30,7 @@
                 <#list menus as menu>
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-"></i>
+                            <i class="nav-icon fas fa-cog  fa-spin ${(menu.icon)!} "></i>
                             <p>
                                 ${(menu.name)!}
                                 <i class="right fas fa-angle-left"></i>
@@ -39,7 +39,7 @@
                         <ul class="nav nav-treeview">
                             <#list menu.children as child>
                             <li class="nav-item">
-                                <a href="/" class="nav-link">
+                                <a href="${(child.url)!}" class="nav-link">
                                     <i class="far fa-circle nav-icon active"></i>
                                     <p>${(child.name)!}</p>
                                 </a>
