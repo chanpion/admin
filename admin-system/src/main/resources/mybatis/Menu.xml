@@ -6,6 +6,10 @@
         SELECT * FROM menu
     </select>
 
+    <select id="findByPid" resultType="menu">
+         SELECT * FROM menu
+         WHERE pid = #{pid}
+    </select>
     <insert id="insert" parameterType="menu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         menu(name,url,icon,order_number)

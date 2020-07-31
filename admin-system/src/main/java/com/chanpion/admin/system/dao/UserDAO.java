@@ -1,18 +1,14 @@
 package com.chanpion.admin.system.dao;
 
-import com.chanpion.admin.system.entity.Menu;
+import com.chanpion.admin.system.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * @author April Chen
- * @date 2020/7/30 19:29
+ * @date 2020/7/31 15:10
  */
 @Repository
 @Mapper
-public interface MenuDAO extends BaseDAO<Menu> {
-
-    List<Menu> findByPid(long pid);
+public interface UserDAO extends BaseDAO<User> {
 }

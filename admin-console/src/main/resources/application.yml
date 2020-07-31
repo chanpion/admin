@@ -15,6 +15,11 @@ spring:
     suffix: .html
     settings:
       classic_compatible: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    locale: zh_CN
+    time-zone: GMT+8
 
 logging:
   level:
