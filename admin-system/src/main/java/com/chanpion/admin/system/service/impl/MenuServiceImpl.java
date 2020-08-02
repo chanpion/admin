@@ -3,9 +3,11 @@ package com.chanpion.admin.system.service.impl;
 import com.chanpion.admin.system.dao.MenuDAO;
 import com.chanpion.admin.system.entity.Menu;
 import com.chanpion.admin.system.service.MenuService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,5 +46,21 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> find(Menu item) {
         return null;
+    }
+
+    @Override
+    public List<Menu> getMenuTree() {
+        return getChildrenMenu(0L);
+    }
+
+    private List<Menu> getChildrenMenu(Long pid) {
+        List<Menu> children = menuDAO.findByPid(pid);
+        if (CollectionUtils.isNotEmpty(children)) {
+            for (Menu m : children) {
+                List<Menu> menuList = getChildrenMenu(m.getId());
+                m.setChildren(menuList);
+            }
+        }
+        return children;
     }
 }

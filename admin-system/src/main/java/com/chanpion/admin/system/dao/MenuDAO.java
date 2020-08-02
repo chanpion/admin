@@ -14,5 +14,11 @@ import java.util.List;
 @Mapper
 public interface MenuDAO extends BaseDAO<Menu> {
 
+    /**
+     * 根据父id查询所有子菜单
+     *
+     * @param pid 父菜单ID
+     * @return 子菜单列表
+     */
     List<Menu> findByPid(long pid);
 }

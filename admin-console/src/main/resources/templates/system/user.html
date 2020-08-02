@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin | 用户管理</title>
+    <#include "/common/head.html">
+</head>
+<body>
+<div class="wrapper">
+    <#include "/common/navbar.html">
+    <#include "/common/menu-sidebar.html">
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">用户管理</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">设置</a></li>
+                            <li class="breadcrumb-item active">用户管理</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="userTable" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>用户名</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <#include "/common/footer.html">
+</div>
+<#include "/common/script.html">
+<script>
+    $(function () {
+        $("#userTable").DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": false,
+            "ajax": {
+                "url": "/menu/all",
+                "dataType": "json",
+                "type": "POST",
+                "dataSrc": function (result) {
+                    return result;
+                }
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "url"},
+                {"data": "icon"},
+                {"data": "orderNumber"}
+            ]
+        });
+    });
+</script>
+</body>
+</html>
