@@ -40,22 +40,6 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <table id="menuTable" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>名称</th>
-                                <th>URL</th>
-                                <th>图标</th>
-                                <th>序号</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="row">
                     <ul id="tree" class="ztree"></ul>
                 </div>
 
@@ -67,38 +51,35 @@
                                 <button type="button" class="close  float-right" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal" action="/menu/add" method="post">
+                                <form id="addMenuForm" class="form-horizontal"  method="post" onsubmit="return false;">
                                     <div class="card-body">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                            <label for="inputName" class="col-sm-2 col-form-label">菜单名</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                                <input type="text" class="form-control" id="inputName" placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                            <label for="inputUrl" class="col-sm-2 col-form-label">URL</label>
                                             <div class="col-sm-10">
-                                                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                                <input type="text" class="form-control" id="inputUrl" placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="offset-sm-2 col-sm-10">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                                                    <label class="form-check-label" for="exampleCheck2">Remember me</label>
-                                                </div>
+                                            <label for="inputIcon" class="col-sm-2 col-form-label">图标</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputIcon" placeholder="Password">
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-info">Sign in</button>
-                                        <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                        <button type="reset" class="btn btn-info" onclick="onCancel()">取消</button>
+                                        <button type="submit" class="btn btn-default float-right" onclick="addMenu(this)">保存</button>
                                     </div>
                                 </form>
                             </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -120,34 +101,5 @@
 <script src="layui/layui.js"></script>
 <script src="ztree/js/jquery.ztree.all.js"></script>
 <script src="js/menu.js"></script>
-<script>
-    $(function () {
-        $("#menuTable").DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            "autoWidth": false,
-            "ajax": {
-                "url": "/menu/all",
-                "dataType": "json",
-                "type": "POST",
-                "dataSrc": function (result) {
-                    return result;
-                }
-            },
-            "columns": [
-                {"data": "id"},
-                {"data": "name"},
-                {"data": "url"},
-                {"data": "icon"},
-                {"data": "orderNumber"}
-            ]
-        });
-    });
-</script>
-
 </body>
 </html>

@@ -34,6 +34,9 @@
                         <tr>
                             <th>ID</th>
                             <th>用户名</th>
+                            <th>年龄</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                     </table>
@@ -45,33 +48,6 @@
     <#include "/common/footer.html">
 </div>
 <#include "/common/script.html">
-<script>
-    $(function () {
-        $("#userTable").DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            "autoWidth": false,
-            "ajax": {
-                "url": "/menu/all",
-                "dataType": "json",
-                "type": "POST",
-                "dataSrc": function (result) {
-                    return result;
-                }
-            },
-            "columns": [
-                {"data": "id"},
-                {"data": "name"},
-                {"data": "url"},
-                {"data": "icon"},
-                {"data": "orderNumber"}
-            ]
-        });
-    });
-</script>
+<script src="js/user.js"></script>
 </body>
 </html>

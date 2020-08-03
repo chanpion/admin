@@ -155,3 +155,19 @@ $(function () {
     });
 
 })
+
+
+function onCancel() {
+    $("#addMenu").modal("hide");
+}
+
+function addMenu(form) {
+    alert(form);
+    $('#addMenuForm').form('submit', {
+        url: '/menu/add',
+        success: function (data) {
+            alert(data);
+        }
+    });
+}
+
