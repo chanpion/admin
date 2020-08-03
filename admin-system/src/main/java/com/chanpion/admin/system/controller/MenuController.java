@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,14 +26,9 @@ public class MenuController {
     }
 
     @GetMapping("/tree")
-    public void tree() {
-        List<Menu> menus = new ArrayList<>();
-        List<Menu> children = new ArrayList<>();
-        children.add(new Menu("菜单管理"));
-        children.add(new Menu("用户管理"));
-        children.add(new Menu("权限管理"));
-        Menu menu = new Menu("系统管理");
-        menu.setChildren(children);
+    @ResponseBody
+    public Object tree() {
+        return menuService.getMenuTree();
     }
 
     @RequestMapping("/add")
