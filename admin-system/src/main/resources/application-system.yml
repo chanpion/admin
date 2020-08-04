@@ -1,0 +1,6 @@
+shiro:
+  web:
+    enabled: true
+  loginUrl: /login
+  successUrl: /
+  unauthorizedUrl: /403
