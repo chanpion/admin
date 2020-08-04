@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.service.impl;
 
+import com.chanpion.admin.common.utils.LogUtil;
 import com.chanpion.admin.system.dao.UserDAO;
 import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.service.UserService;
@@ -24,17 +25,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(User item) {
-
+        userDAO.insert(item);
     }
 
     @Override
     public void update(User item) {
-
+        int row = userDAO.update(item);
+        LogUtil.info("update:{}", row);
     }
 
     @Override
     public void remove(User item) {
-
+        int num = userDAO.delete(item);
+        LogUtil.info("delete:{}", num);
     }
 
     @Override

@@ -22,21 +22,21 @@ public interface BaseDAO<T> {
      *
      * @param item 数据记录
      */
-    void insert(T item);
+    int insert(T item);
 
     /**
      * 更新数据
      *
      * @param item 数据记录
      */
-    void update(T item);
+    int update(T item);
 
     /**
      * 删除数据
      *
      * @param item 数据记录
      */
-    void delete(T item);
+    int delete(T item);
 
     /**
      * 查询列表

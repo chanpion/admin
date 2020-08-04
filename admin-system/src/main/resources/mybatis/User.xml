@@ -12,4 +12,16 @@
         VALUES
         (#{name})
     </insert>
+
+    <delete id="delete" parameterType="user">
+        <if test="id != null">
+            DELETE FROM user WHERE id=#{id}
+        </if>
+    </delete>
+
+    <update id="update" parameterType="user">
+        UPDATE user
+        SET age=#{age}
+        WHERE id=#{id}
+    </update>
 </mapper>

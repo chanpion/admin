@@ -26,11 +26,19 @@
 
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon  fas fa-home"></i>
+                    <p>
+                        首页
+                    </p>
+                </a>
+            </li>
             <#if menus??>
                 <#list menus as menu>
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-cog  fa-spin ${(menu.icon)!} "></i>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 ${(menu.name)!}
                                 <i class="right fas fa-angle-left"></i>
@@ -40,7 +48,7 @@
                             <#list menu.children as child>
                             <li class="nav-item">
                                 <a href="${(child.url)!}" class="nav-link">
-                                    <i class="far fa-circle nav-icon active"></i>
+                                    <i class="far  nav-icon "></i>
                                     <p>${(child.name)!}</p>
                                 </a>
                             </li>

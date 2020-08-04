@@ -1,11 +1,11 @@
 package com.chanpion.admin.system.controller;
 
+import com.chanpion.admin.common.BaseResponse;
 import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,5 +29,28 @@ public class UserController {
     @ResponseBody
     public List<User> allUser() {
         return userService.findAll();
+    }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public BaseResponse addUser(User user) {
+        userService.add(user);
+        return BaseResponse.SUCCESS;
+    }
+
+    @RequestMapping("/remove/{id}")
+    @ResponseBody
+    public BaseResponse removeUser(@PathVariable Long id) {
+        User user = new User();
+        user.setId(id);
+        userService.remove(user);
+        return BaseResponse.SUCCESS;
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public BaseResponse update(User user, Model model) {
+        userService.update(user);
+        return BaseResponse.SUCCESS;
     }
 }
