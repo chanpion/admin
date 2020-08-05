@@ -6,9 +6,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author April Chen
@@ -23,32 +21,36 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public String doLogin(String username, String password) {
+    public String doLogin(String username, String password, @RequestParam(required = false, defaultValue = "false") Boolean rememberMe) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return "账号或密码错误！";
+            return "/error";
         } catch (AuthorizationException e) {
             e.printStackTrace();
-            return "没有权限";
+            return "/403";
         }
         return "redirect:/";
     }
 
-    @GetMapping("register")
+    /**
+     * 退出
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        SecurityUtils.getSubject().logout();
+        return "login";
+    }
+
+    @GetMapping("/register")
     public String register() {
         return "register";
     }
 
-    @PostMapping("register")
-    public void doRegister() {
-        System.out.println("register...");
-    }
-
-    @GetMapping("forgot-password")
+    @GetMapping("/forgot-password")
     public String forgotPassword() {
         return "forgot-password";
     }
