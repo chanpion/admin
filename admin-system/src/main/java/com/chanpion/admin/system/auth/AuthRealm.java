@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.auth;
 
+import com.chanpion.admin.common.utils.LogUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -19,6 +20,7 @@ public class AuthRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        return new SimpleAuthenticationInfo(token.getUsername(), "admin", getName());
+        LogUtil.info("token:{}", token);
+        return new SimpleAuthenticationInfo("admin", "admin", getName());
     }
 }
