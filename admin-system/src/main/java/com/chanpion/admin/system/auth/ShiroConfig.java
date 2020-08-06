@@ -51,7 +51,7 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/user/register", "anon");
         chainDefinition.addPathDefinition("/forgot-password", "anon");
-        chainDefinition.addPathDefinition("/**", "authc");
+        chainDefinition.addPathDefinition("/**", "anon");
 
 //        chainDefinition.addPathDefinition("/", "anon");
 //        chainDefinition.addPathDefinition("/user/**", "anon");

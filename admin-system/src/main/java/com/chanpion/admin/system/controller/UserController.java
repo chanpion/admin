@@ -31,7 +31,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping("/register")
+    @RequestMapping("/register")
     @ResponseBody
     public BaseResponse addUser(User user) {
         userService.add(user);

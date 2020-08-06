@@ -37,6 +37,27 @@ $(function () {
             }
         ]
     });
+
+    $('#registerForm').submit(function (e) {
+        var formData = new FormData(this);
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/user/register",
+            data: formData,
+            dataType: $('#registerForm').serialize(),
+            success: function (data) {
+                if (data.success) {
+                    layer.alert("上传成功")
+                } else {
+                    layer.alert(data.error)
+                }
+            }
+        });
+        return false;
+    });
+
+
 });
 
 
