@@ -26,4 +26,9 @@ public class IndexController {
     public String table() {
         return "table";
     }
+
+    @GetMapping("/demo")
+    public String demo() {
+        return "demo";
+    }
 }
