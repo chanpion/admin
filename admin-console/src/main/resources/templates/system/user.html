@@ -27,40 +27,49 @@
         </div>
 
         <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <form action="/user/list/1" method="post" class="form-inline">
-                        <div class="box-header">
-                            <div class="input-group">
-                                <a class="btn btn-primary dialog" href="javascript:;" data-url="/system/user/add" data-title="创建新用户" data-width="850" data-height="550"><i class="fa fa-plus"></i> 创建新用户</a>
-                            </div>
-                            <div class="input-group">
-                                <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                                    <a href="/system/user/list/1" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="btn-group">
+                                    <a class="btn btn-primary dialog" href="javascript:;" data-url="/system/user/add" data-title="创建新用户" data-width="850" data-height="550"><i class="fa fa-plus"></i> 创建新用户</a>
+                                </div>
+                                <div class="btn-group">
+                                    <form class="form-inline ml-3">
+                                        <div class="input-group input-group-sm">
+                                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-navbar" type="submit">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="btn-group float-right">
+                                    <button type="button" class="btn btn-primary btn-flat" onclick="exportTo('用户数据');"><i class="fa fa-file-excel-o"></i> 导出</button>
                                 </div>
                             </div>
-                            <div class="input-group pull-right">
-                                <button type="button" class="btn btn-primary btn-flat" onclick="exportTo('用户数据');"><i class="fa fa-file-excel-o"></i> 导出</button>
+                            <div class="card-body">
+                                <table id="userTable" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>用户名</th>
+                                        <th>年龄</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col-md-12">
-                    <table id="userTable" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>用户名</th>
-                            <th>年龄</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                    </table>
+                    </div>
                 </div>
             </div>
+
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
