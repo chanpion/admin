@@ -21,6 +21,7 @@ $(function () {
         "columns": [
             {"data": "id"},
             {"data": "username"},
+            {"data": "email"},
             {"data": "age"},
             {"data": "createTime"},
             {"data": "id"}
@@ -31,7 +32,7 @@ $(function () {
                 "data": null,
                 "render": function (data) {
                     var btn1 = '<a class="btn btn-sm btn-info" onclick="editUser(' + data + ')"><i class="fas fa-pencil-alt"></i> 编辑</a>  ';
-                    var btn2 = '<a class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#modal-default"><i class="fas fa-trash"></i> 删除</a>  ';
+                    var btn2 = '<a class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#modal-remove" onclick="confirmRemoveUser(' + data + ')"><i class="fas fa-trash"></i></a>  ';
                     return btn1 + btn2;
                 }
             }
@@ -39,32 +40,49 @@ $(function () {
     });
 
     $('#registerForm').submit(function (e) {
-        var formData = new FormData(this);
-        $.ajax({
-            async: false,
-            type: "POST",
-            url: "/user/register",
-            data: formData,
-            dataType: $('#registerForm').serialize(),
-            success: function (data) {
-                if (data.success) {
-                    layer.alert("上传成功")
-                } else {
-                    layer.alert(data.error)
-                }
-            }
-        });
         return false;
     });
 
 
 });
 
+function confirmRemoveUser(id) {
+    $("#removeId").val(id);
+}
 
-function removeUser(data) {
-    alert(data);
+function removeUser() {
+    var id = $("#removeId").val();
+    $.ajax({
+        url: "/user/remove/" + id,
+        type: "post",
+        success: function (data) {
+            $('#modal-add-user').modal('hide');
+            $('#userTable').DataTable().ajax.reload()
+        },
+        error: function (msg) {
+            alert("请求异常！");
+        }
+    })
+    $('#modal-remove').modal('hide');
+    $("#removeId").val('');
 }
 
 function editUser(data) {
-    alert(data);
+    $('#modal-remove').modal('hide');
 }
+
+function addUser() {
+    $.ajax({
+        url: "/user/register",
+        type: "post",
+        data: $('#form-add-user').serialize(),
+        success: function (data) {
+            $('#modal-add-user').modal('hide');
+            $('#userTable').DataTable().ajax.reload()
+        },
+        error: function (msg) {
+            alert("请求异常！");
+        }
+    })
+}
+

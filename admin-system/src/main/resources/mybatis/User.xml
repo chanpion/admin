@@ -8,9 +8,9 @@
 
     <insert id="insert" parameterType="menu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-        user(name,password,email)
+        user(username,password,email,age)
         VALUES
-        (#{name},#{password},#{email})
+        (#{username},#{password},#{email},#{age})
     </insert>
 
     <delete id="delete" parameterType="user">

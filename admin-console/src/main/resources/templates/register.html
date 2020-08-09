@@ -56,7 +56,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">注册</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="register()">注册</button>
                     </div>
                 </div>
             </form>
@@ -67,6 +67,22 @@
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="js/user.js"></script>
+<script>
+    function register() {
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/user/register",
+            data: $('#registerForm').serialize(),
+            success: function (data) {
+               alert(JSON.stringify(data));
+                window.location.href = "/login";
+            },
+            error: function (msg) {
+                alert("注册失败：" + msg)
+            }
+        });
+    }
+</script>
 </body>
 </html>
