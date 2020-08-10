@@ -11,7 +11,7 @@ import org.apache.shiro.util.ByteSource;
  * @date 2019/9/6 16:20
  */
 public class ShiroUtil {
-    private static SecureRandomNumberGenerator secureRandom = new SecureRandomNumberGenerator();
+    private static final SecureRandomNumberGenerator secureRandom = new SecureRandomNumberGenerator();
     public static final String ALGORITHM_NAME = "md5";
     public static final int HASH_ITERATIONS = 2;
 
@@ -39,7 +39,7 @@ public class ShiroUtil {
         return new SimpleHash(ALGORITHM_NAME, password, ByteSource.Util.bytes(salt), HASH_ITERATIONS).toHex();
     }
 
-    private static String randomSalt() {
+    public static String randomSalt() {
         return secureRandom.nextBytes().toHex();
     }
 

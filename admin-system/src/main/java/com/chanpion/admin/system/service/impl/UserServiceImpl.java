@@ -4,6 +4,7 @@ import com.chanpion.admin.common.utils.LogUtil;
 import com.chanpion.admin.system.dao.UserDAO;
 import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.service.UserService;
+import com.chanpion.admin.system.utils.ShiroUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,8 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void add(User item) {
-        userDAO.insert(item);
+    public void add(User user) {
+        String salt = ShiroUtil.randomSalt();
+        user.setSalt(salt);
+        String password = ShiroUtil.encryptPassword(user.getPassword(), salt);
+        user.setPassword(password);
+        userDAO.insert(user);
     }
 
     @Override

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="dist/css/ionicons.min.css">
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="dist/css/fonts.css" >
@@ -21,12 +20,20 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">登录系统</p>
 
-            <form action="/login" method="post">
+            <form action="/login" method="post" id="loginForm">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="用户名" name="username">
-                    <div class="input-group-append">
+                    <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="用户名" name="username">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
@@ -48,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+                        <button type="button" class="btn btn-primary btn-block" id="btn-login">登录</button>
                     </div>
                 </div>
             </form>
@@ -75,8 +82,36 @@
 </div>
 
 <script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 
+<script>
+$(function(){
+
+    $('#btn-login').click(function(){
+        $('#loginForm').submit();
+    })
+
+    $('#btn-login').keyup(function(){
+        $('#loginForm').submit();
+    })
+
+    $( "#loginForm" ).validate({
+        rules: {
+            password: "required",
+            username: {
+                required: true,
+                minlength: 2
+            },
+            email: {
+                required: true,
+                email: true
+            }
+        }
+    });
+})
+</script>
 </body>
 </html>

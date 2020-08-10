@@ -37,7 +37,7 @@ public class LoginController {
             subject.login(token);
             if (subject.isAuthenticated()) {
                 LogUtil.info("user {} login success.", username);
-                return "/";
+                return "redirect:/index";
             } else {
                 return "error";
             }
@@ -61,7 +61,7 @@ public class LoginController {
             model.addAttribute("message", msg);
             LogUtil.info(msg);
         }
-        return "/error";
+        return "/login";
     }
 
     /**

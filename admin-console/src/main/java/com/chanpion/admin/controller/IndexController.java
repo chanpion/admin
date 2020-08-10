@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = {"", "/", "/index"})
     public String index(Model model) {
 
         return "index";
@@ -30,5 +30,10 @@ public class IndexController {
     @GetMapping("/demo")
     public String demo() {
         return "demo";
+    }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";
     }
 }

@@ -17,4 +17,5 @@ public class User {
     private String image;
     private Date createTime;
     private Integer age;
+    private String salt;
 }
