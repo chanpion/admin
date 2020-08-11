@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByName(String username) {
+        return userDAO.findByName(username);
+    }
+
+    @Override
     public void add(User user) {
         String salt = ShiroUtil.randomSalt();
         user.setSalt(salt);
@@ -49,4 +54,6 @@ public class UserServiceImpl implements UserService {
     public List<User> find(User item) {
         return null;
     }
+
+
 }

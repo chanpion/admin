@@ -6,6 +6,11 @@
         SELECT * FROM user
     </select>
 
+    <select id="findByName" resultType="user">
+        SELECT * FROM user
+        WHERE username=#{username}
+    </select>
+
     <insert id="insert" parameterType="menu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         user(username,password,email,age)

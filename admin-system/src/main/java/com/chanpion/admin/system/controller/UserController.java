@@ -31,6 +31,11 @@ public class UserController {
         return userService.findAll();
     }
 
+    @RequestMapping("/name/{username}")
+    public User findByName(@PathVariable String username) {
+        return userService.findByName(username);
+    }
+
     @RequestMapping("/register")
     @ResponseBody
     public BaseResponse addUser(User user) {
