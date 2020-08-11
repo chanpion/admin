@@ -22,12 +22,12 @@
 
             <form action="/login" method="post" id="loginForm">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
+                    <input type="text" class="form-control" placeholder="用户名" name="username">
+                    <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="用户名" name="username">
                 </div>
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" placeholder="Email">
@@ -85,13 +85,14 @@
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/localization/messages_zh.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 
 <script>
 $(function(){
 
     $('#btn-login').click(function(){
-        $('#loginForm').submit();
+        // $('#loginForm').submit();
     })
 
     $('#btn-login').keyup(function(){
@@ -99,6 +100,7 @@ $(function(){
     })
 
     $( "#loginForm" ).validate({
+        focusInvalid : true,   //验证提示时，鼠标光标指向提示的input
         rules: {
             password: "required",
             username: {
@@ -109,6 +111,12 @@ $(function(){
                 required: true,
                 email: true
             }
+        },
+        errorElement : "div",
+        errorClass : "error_info",
+        highlight : function(element, errorClass, validClass) {
+            $(element).closest('.form-control').addClass(
+                'highlight_red');
         }
     });
 })
