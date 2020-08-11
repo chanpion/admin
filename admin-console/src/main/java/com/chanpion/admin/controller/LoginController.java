@@ -22,12 +22,12 @@ import java.io.IOException;
 @Controller
 public class LoginController {
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
-        return "login";
+        return "system/login";
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String doLogin(Model model, String username, String password,
                           @RequestParam(required = false, defaultValue = "false") Boolean rememberMe) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
