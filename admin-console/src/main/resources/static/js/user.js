@@ -68,20 +68,19 @@ function removeUser() {
 }
 
 function editUser(id) {
-  $.ajax({
-      url: "/user/id/" + id,
-      type: "get",
-      success: function (data) {
-          $('#form-update-user').form('load', {
-              username: data.username,
-              email: data.email,
-              age: data.age
-          });
-      },
-      error: function (msg) {
-          alert("请求异常！");
-      }
-  });
+    $.ajax({
+        url: "/user/id/" + id,
+        type: "get",
+        success: function (data) {
+            $('#form-update-user input').each(function (index, element) {
+                var name = $(element).attr("name");
+                alert(index + ":" + name);
+            });
+        },
+        error: function (msg) {
+            alert("请求异常！");
+        }
+    });
 }
 
 function addUser() {
