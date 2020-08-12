@@ -1,7 +1,5 @@
 package com.chanpion.admin.system.dao;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /**
@@ -45,4 +43,12 @@ public interface BaseDAO<T> {
      * @return 列表
      */
     List<T> find(T item);
+
+    /**
+     * 根据ID查询
+     *
+     * @param id 数据id
+     * @return 数据记录
+     */
+    T findById(Long id);
 }

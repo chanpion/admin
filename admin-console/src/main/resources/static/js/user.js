@@ -31,7 +31,7 @@ $(function () {
                 "targets": -1,
                 "data": null,
                 "render": function (data) {
-                    var btn1 = '<a class="btn btn-sm btn-info" onclick="editUser(' + data + ')"><i class="fas fa-pencil-alt"></i> 编辑</a>  ';
+                    var btn1 = '<a class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-update-user" onclick="editUser(' + data + ')"><i class="fas fa-pencil-alt"></i> 编辑</a>  ';
                     var btn2 = '<a class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#modal-remove" onclick="confirmRemoveUser(' + data + ')"><i class="fas fa-trash"></i></a>  ';
                     return btn1 + btn2;
                 }
@@ -67,8 +67,21 @@ function removeUser() {
     $("#removeId").val('');
 }
 
-function editUser(data) {
-    $('#modal-remove').modal('hide');
+function editUser(id) {
+  $.ajax({
+      url: "/user/id/" + id,
+      type: "get",
+      success: function (data) {
+          $('#form-update-user').form('load', {
+              username: data.username,
+              email: data.email,
+              age: data.age
+          });
+      },
+      error: function (msg) {
+          alert("请求异常！");
+      }
+  });
 }
 
 function addUser() {

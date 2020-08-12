@@ -32,8 +32,15 @@ public class UserController {
     }
 
     @RequestMapping("/name/{username}")
+    @ResponseBody
     public User findByName(@PathVariable String username) {
         return userService.findByName(username);
+    }
+
+    @RequestMapping("/id/{id}")
+    @ResponseBody
+    public User findById(@PathVariable Long id) {
+        return userService.findById(id);
     }
 
     @RequestMapping("/register")

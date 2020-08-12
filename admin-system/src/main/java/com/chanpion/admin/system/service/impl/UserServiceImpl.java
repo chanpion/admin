@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id) {
+        return userDAO.findById(id);
+    }
+
+    @Override
     public void add(User user) {
         String salt = ShiroUtil.randomSalt();
         user.setSalt(salt);

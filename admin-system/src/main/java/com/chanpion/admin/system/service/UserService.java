@@ -15,4 +15,12 @@ public interface UserService extends BaseService<User> {
      * @return 用户
      */
     User findByName(String username);
+
+    /**
+     * 根据id查询
+     *
+     * @param id 用户id
+     * @return 用户
+     */
+    User findById(Long id);
 }
