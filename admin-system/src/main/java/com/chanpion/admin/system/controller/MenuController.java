@@ -1,13 +1,17 @@
 package com.chanpion.admin.system.controller;
 
+import com.chanpion.admin.system.MenuSearcher;
 import com.chanpion.admin.system.entity.Menu;
 import com.chanpion.admin.system.service.MenuService;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,6 +23,9 @@ import java.util.List;
 public class MenuController {
     @Resource
     private MenuService menuService;
+
+    @Resource
+    private MenuSearcher menuSearcher;
 
     @GetMapping
     public String menu() {
@@ -42,5 +49,11 @@ public class MenuController {
     @ResponseBody
     public List<Menu> all() {
         return menuService.findAll();
+    }
+
+    @RequestMapping("/search/{name}")
+    @ResponseBody
+    public Object search(@PathVariable String name) throws Exception {
+        return menuSearcher.search(name);
     }
 }

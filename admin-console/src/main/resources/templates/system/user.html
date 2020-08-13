@@ -20,7 +20,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="btn-group">
-                                    <a class="btn btn-primary dialog"  data-toggle="modal" data-target="#modal-add-user" data-title="创建新用户" data-width="850" data-height="550"><i class="fa fa-plus"></i> 创建新用户</a>
+                                    <a class="btn btn-primary dialog"  data-toggle="modal" data-target="#modal-add-user" data-title="创建新用户"  onclick="document.getElementById('form-add-user').reset()" data-width="850" data-height="550"><i class="fa fa-plus"></i> 创建新用户</a>
                                 </div>
                                 <div class="btn-group">
                                     <form class="form-inline ml-3">
@@ -90,7 +90,7 @@
                                     <div class="form-group row">
                                         <label for="inputIcon" class="col-sm-2 col-form-label">年龄</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="inputAge" name="age" placeholder="年龄">
+                                            <input type="number" class="form-control" name="age" placeholder="年龄">
                                         </div>
                                     </div>
                                 </div>
@@ -108,36 +108,31 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">添加用户</h4>
+                            <h4 class="modal-title">更新用户信息</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <form id="form-update-user" class="form-horizontal" onsubmit="return false;">
+                                <input type="hidden" name="id">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">用户名</label>
+                                        <label class="col-sm-2 col-form-label">用户名</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" name="username" placeholder="用户名">
+                                            <input type="text" class="form-control"  name="username" placeholder="用户名" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">邮箱</label>
+                                        <label class="col-sm-2 col-form-label">邮箱</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="邮箱">
+                                            <input type="email" class="form-control" name="email" placeholder="邮箱" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputIcon" class="col-sm-2 col-form-label">密码</label>
+                                        <label class="col-sm-2 col-form-label">年龄</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="inputIcon" name="password" placeholder="密码">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputIcon" class="col-sm-2 col-form-label">年龄</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="inputAge" name="age" placeholder="年龄">
+                                            <input type="number" class="form-control" name="age" placeholder="年龄">
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +140,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" onclick="addUser()">保存</button>
+                            <button type="button" class="btn btn-primary" onclick="updateUser()">保存</button>
                         </div>
                     </div>
                 </div>

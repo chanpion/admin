@@ -4,8 +4,10 @@ import com.chanpion.admin.common.BaseResponse;
 import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -61,7 +63,7 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResponse update(User user, Model model) {
+    public BaseResponse update(User user) {
         userService.update(user);
         return BaseResponse.SUCCESS;
     }

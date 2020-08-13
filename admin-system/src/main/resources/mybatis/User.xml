@@ -31,7 +31,14 @@
 
     <update id="update" parameterType="user">
         UPDATE user
-        SET age=#{age}
+        <set>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+        </set>
         WHERE id=#{id}
     </update>
 </mapper>
