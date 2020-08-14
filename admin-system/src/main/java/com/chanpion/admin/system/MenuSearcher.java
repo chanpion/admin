@@ -44,8 +44,8 @@ public class MenuSearcher implements ApplicationRunner {
         List<Menu> menus = menuService.findAll();
         menus.forEach(menu -> {
             Document document = new Document();
-            document.add(new TextField("name", menu.getName(), Field.Store.YES));
-            document.add(new StringField("id", menu.getId() + "", Field.Store.YES));
+            document.add(new StringField("name", menu.getName(), Field.Store.YES));
+            document.add(new LongPoint("id", menu.getId()));
             document.add(new StringField("pid", menu.getPid() + "", Field.Store.YES));
             try {
                 indexWriter.addDocument(document);
@@ -62,7 +62,8 @@ public class MenuSearcher implements ApplicationRunner {
         IndexSearcher indexSearcher = searcherManager.acquire();
         QueryParser qp = new QueryParser("name", analyzer);
         qp.setDefaultOperator(QueryParser.OR_OPERATOR);
-        Query query = qp.parse(name);
+//        Query query = qp.parse(name);
+        Query query = new TermQuery(new Term("name", name));
         TopDocs topDocs = indexSearcher.search(query, 10);
         System.out.println("查询结果的总数" + topDocs.totalHits);
         //遍历查询结果
