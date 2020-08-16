@@ -3,11 +3,9 @@ package com.chanpion.admin.system.controller;
 import com.chanpion.admin.common.BaseResponse;
 import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -48,6 +46,12 @@ public class UserController {
     @RequestMapping("/register")
     @ResponseBody
     public BaseResponse addUser(User user) {
+        if (StringUtils.isBlank(user.getUsername())) {
+            return BaseResponse.error("用户名不能为空");
+        }
+        if (StringUtils.isBlank(user.getPassword())) {
+            return BaseResponse.error("密码不能为空");
+        }
         userService.add(user);
         return BaseResponse.SUCCESS;
     }

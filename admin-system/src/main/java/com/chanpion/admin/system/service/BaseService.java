@@ -43,4 +43,11 @@ public interface BaseService<T> {
      * @return 列表
      */
     List<T> find(T item);
+
+    /**
+     * 根据Id 删除
+     *
+     * @param id id
+     */
+    void removeById(Long id);
 }

@@ -25,25 +25,36 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void add(Menu item) {
-        if (item == null) {
+    public void add(Menu menu) {
+        if (menu == null) {
             return;
         }
-        menuDAO.insert(item);
+        menuDAO.insert(menu);
     }
 
     @Override
-    public void update(Menu item) {
-
+    public void update(Menu menu) {
+        menuDAO.update(menu);
     }
 
     @Override
     public void remove(Menu item) {
+        menuDAO.deleteById(item.getId());
     }
 
     @Override
     public List<Menu> find(Menu item) {
         return null;
+    }
+
+    /**
+     * 根据Id 删除
+     *
+     * @param id id
+     */
+    @Override
+    public void removeById(Long id) {
+        menuDAO.deleteById(id);
     }
 
     @Override

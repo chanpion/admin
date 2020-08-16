@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -37,6 +38,10 @@ public class CaptchaUtil {
 
     public static DefaultKaptcha getCaptcha() {
         return captcha;
+    }
+
+    public static boolean checkCaptcha(String captcha) {
+        return Objects.equals(captcha, WebUtil.getRequest().getSession().getAttribute("verifyCode"));
     }
 
     public static void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {

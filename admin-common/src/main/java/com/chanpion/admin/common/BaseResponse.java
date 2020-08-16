@@ -34,4 +34,8 @@ public class BaseResponse {
     public void setStatusMsg(String statusMsg) {
         this.statusMsg = statusMsg;
     }
+
+    public static BaseResponse error(String msg) {
+        return new BaseResponse(-1, msg);
+    }
 }

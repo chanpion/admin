@@ -26,7 +26,7 @@ public class DaoAspect {
             result = joinPoint.proceed();
         } finally {
             long end = System.currentTimeMillis();
-            LogUtil.info("method:{},rt:{}", name, end - begin);
+            LogUtil.info("method:{}, rt:{} ", name, end - begin);
         }
         return result;
     }

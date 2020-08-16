@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="dist/css/fonts.css" >
+
+    <style>
+        .register-page{
+            background-image: url('dist/img/background.jpg');
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -21,6 +28,9 @@
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">注册账号</p>
+            <div class="input-group mb-3">
+                <span style="display: inline;color: #e35b5a;" class="error"></span>
+            </div>
             <form id="registerForm" method="post">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="用户名" name="username">
@@ -70,16 +80,18 @@
 <script>
     function register() {
         $.ajax({
-            async: false,
             type: "POST",
             url: "/user/register",
             data: $('#registerForm').serialize(),
             success: function (data) {
-               alert(JSON.stringify(data));
-                window.location.href = "/login";
+                if (data.statusCode === 0){
+                    window.location.href = "/login";
+                }else {
+                    $(".error").html(data.statusMsg)
+                }
             },
             error: function (msg) {
-                alert("注册失败：" + msg)
+                $(".error").html(msg);
             }
         });
     }

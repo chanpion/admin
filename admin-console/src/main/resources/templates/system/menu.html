@@ -3,9 +3,17 @@
 <head>
     <title>Admin | 菜单管理</title>
     <#include "/common/head.html">
-    <link rel="stylesheet" href="../../static/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
-    <link rel="stylesheet" href="../../static/plugins/ztree/css/demo.css">
+    <link rel="stylesheet" href="plugins/ztree/css/zTreeStyle/zTreeStyle.css">
     <style type="text/css">
+        div.zTreeDemoBackground {width:250px;height:362px;text-align:left;}
+        ul.ztree {
+            border: 1px solid #617775;
+            background: #f0f6e4;
+            min-width:220px;
+            min-height:360px;
+            overflow-y:scroll;
+            overflow-x:auto;
+        }
         .ztree li span.button.add {
             margin-left: 2px;
             margin-right: -1px;
@@ -38,68 +46,59 @@
         </div>
 
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <ul id="tree" class="ztree"></ul>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul id="menuTree" class="ztree"></ul>
                 </div>
-
-                <div class="modal fade" id="addMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">添加菜单</h4>
-                                <button type="button" class="close  float-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addMenuForm" class="form-horizontal"  method="post" onsubmit="return false;">
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">菜单名</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputName" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputUrl" class="col-sm-2 col-form-label">URL</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputUrl" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputIcon" class="col-sm-2 col-form-label">图标</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputIcon" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="reset" class="btn btn-info" onclick="onCancel()">取消</button>
-                                        <button type="submit" class="btn btn-default float-right" onclick="addMenu(this)">保存</button>
-                                    </div>
-                                </form>
-                            </div>
+                <div class="col-md-6">
+                    <div class="card card-info" id="menu-div" style="display: none">
+                        <div class="card-header">
+                            <h3 class="card-title">菜单</h3>
                         </div>
+                        <form class="form-horizontal" id="menuForm">
+                            <input name="id" hidden>
+                            <input name="type" hidden>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">菜单名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="name" class="form-control" placeholder="菜单名称">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">URL</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="url" class="form-control" placeholder="URL">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label f class="col-sm-2 col-form-label">图标</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"name="icon" placeholder="图标" oninput="previewIcon()">
+                                            <div class="input-group-append input-group-text">
+                                                <i class="fas fa-bars" id="previewIcon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="reset" class="btn btn-info" onclick="onCancel()">取消</button>
+                                <button type="button" class="btn btn-default float-right" onclick="save()">保存</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
-
-
 </div>
 
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/chart.js/Chart.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../static/plugins/layui/layui.js"></script>
-<script src="../../static/plugins/ztree/js/jquery.ztree.all.js"></script>
+<#include "/common/script.html">
+<script src="plugins/ztree/js/jquery.ztree.all.js"></script>
 <script src="js/menu.js"></script>
+
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.chanpion.admin.system.auth;
 
+import com.chanpion.admin.system.utils.ShiroUtil;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.mgt.SessionsSecurityManager;
@@ -28,8 +30,18 @@ public class ShiroConfig {
 //    }
 
     @Bean
+    public CredentialsMatcher credentialsMatcher() {
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        credentialsMatcher.setHashAlgorithmName(ShiroUtil.ALGORITHM_NAME);
+        credentialsMatcher.setHashIterations(ShiroUtil.HASH_ITERATIONS);
+        return credentialsMatcher;
+    }
+
+    @Bean
     public AuthRealm authRealm() {
-        return new AuthRealm();
+        AuthRealm authRealm = new AuthRealm();
+        authRealm.setCredentialsMatcher(credentialsMatcher());
+        return authRealm;
     }
 
     @Bean
@@ -51,7 +63,8 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("/register", "anon");
         chainDefinition.addPathDefinition("/user/register", "anon");
         chainDefinition.addPathDefinition("/forgot-password", "anon");
-        chainDefinition.addPathDefinition("/**", "anon");
+        chainDefinition.addPathDefinition("/captcha", "anon");
+        chainDefinition.addPathDefinition("/**", "authc");
 
 //        chainDefinition.addPathDefinition("/", "anon");
 //        chainDefinition.addPathDefinition("/user/**", "anon");

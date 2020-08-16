@@ -60,5 +60,15 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 根据Id 删除
+     *
+     * @param id id
+     */
+    @Override
+    public void removeById(Long id) {
+        userDAO.deleteById(id);
+    }
+
 
 }

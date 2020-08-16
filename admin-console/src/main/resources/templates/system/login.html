@@ -11,8 +11,16 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="dist/css/fonts.css">
   <link rel="stylesheet" href="dist/css/ionicons.min.css">
+
+  <style>
+    .login-page{
+      background-image: url('dist/img/background.jpg');
+      background-size: 100%;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
+
 <div class="login-box">
   <div class="login-logo">
     <a href="/"><b>Admin</b></a>
@@ -21,9 +29,12 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">登录系统</p>
 
-      <form action="/login" method="post">
+      <form  method="post" id="loginForm">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <span style="display: inline;color: #e35b5a;" class="error"></span>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="用户名" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -31,12 +42,24 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="password" class="form-control" placeholder="密码" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="验证码" name="captcha">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-eye"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <img alt="如果看不清楚，请单击图片刷新！" id="captcha" class="pointer" src="/captcha" onclick="refreshCaptcha()">
+          <a href="javascript:void(0);" onclick="refreshCaptcha()">点击刷新</a>
         </div>
         <div class="row">
           <div class="col-8">
@@ -48,7 +71,7 @@
             </div>
           </div>
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">登录</button>
+            <button type="button" class="btn btn-primary btn-block" id="btn-login">登录</button>
           </div>
         </div>
       </form>
@@ -78,5 +101,31 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 
+<script>
+  $(function () {
+    $('#btn-login').click(function(){
+      $.ajax({
+        url: "/login",
+        type: "POST",
+        data: $('#loginForm').serialize(),
+        success: function (data) {
+          if (data.statusCode !== 0){
+            $(".error").html(data.statusMsg)
+            refreshCaptcha();
+          }else {
+            window.location.href="/index";
+          }
+        },
+        error: function (msg) {
+          $(".error").html(data.statusMsg)
+        }
+      })
+    })
+  });
+
+  function refreshCaptcha() {
+    $('#captcha').attr('src', '/captcha?t=" + $.now()');
+  }
+</script>
 </body>
 </html>

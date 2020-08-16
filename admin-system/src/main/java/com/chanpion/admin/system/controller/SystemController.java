@@ -1,26 +1,30 @@
-package com.chanpion.admin.controller;
+package com.chanpion.admin.system.controller;
 
+import com.chanpion.admin.common.BaseResponse;
 import com.chanpion.admin.common.utils.LogUtil;
+import com.chanpion.admin.system.service.UserService;
 import com.chanpion.admin.system.utils.CaptchaUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
  * @author April Chen
- * @date 2020/7/27 17:24
+ * @date 2020/8/15 14:51
  */
 @Controller
-public class LoginController {
+public class SystemController {
+    @Resource
+    private UserService userService;
 
     @GetMapping("/login")
     public String login() {
@@ -28,8 +32,13 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String doLogin(Model model, String username, String password,
-                          @RequestParam(required = false, defaultValue = "false") Boolean rememberMe) {
+    @ResponseBody
+    public BaseResponse doLogin(Model model, String username, String password, String captcha,
+                                @RequestParam(required = false, defaultValue = "false") Boolean rememberMe) {
+        if (!CaptchaUtil.checkCaptcha(captcha)) {
+            model.addAttribute("message", "验证码错误");
+            return new BaseResponse(-1, "验证码不正确");
+        }
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         Subject subject = SecurityUtils.getSubject();
         String msg = null;
@@ -37,9 +46,10 @@ public class LoginController {
             subject.login(token);
             if (subject.isAuthenticated()) {
                 LogUtil.info("user {} login success.", username);
-                return "redirect:/index";
+                model.addAttribute("user", userService.findByName(username));
+                return BaseResponse.SUCCESS;
             } else {
-                return "error";
+                return BaseResponse.ERROR;
             }
         } catch (IncorrectCredentialsException e) {
             msg = "密码有误，请重新输入!";
@@ -59,9 +69,11 @@ public class LoginController {
             LogUtil.error("{}", e);
         } finally {
             model.addAttribute("message", msg);
-            LogUtil.info(msg);
+            if (msg != null) {
+                LogUtil.error(msg);
+            }
         }
-        return "/login";
+        return new BaseResponse(-1, msg);
     }
 
     /**
@@ -70,7 +82,7 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         SecurityUtils.getSubject().logout();
-        return "login";
+        return "forward:/login";
     }
 
     @GetMapping("/register")
@@ -91,5 +103,4 @@ public class LoginController {
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CaptchaUtil.captcha(request, response);
     }
-
 }

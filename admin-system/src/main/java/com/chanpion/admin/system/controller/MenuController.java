@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.controller;
 
+import com.chanpion.admin.common.BaseResponse;
 import com.chanpion.admin.system.MenuSearcher;
 import com.chanpion.admin.system.entity.Menu;
 import com.chanpion.admin.system.service.MenuService;
@@ -43,6 +44,19 @@ public class MenuController {
     public Menu addMenu(Menu menu) {
         menuService.add(menu);
         return menu;
+    }
+
+    @RequestMapping("/remove/{id}")
+    @ResponseBody
+    public BaseResponse removeMenu(@PathVariable Long id) {
+        return BaseResponse.SUCCESS;
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public BaseResponse updateMenu(Menu menu) {
+        menuService.update(menu);
+        return BaseResponse.SUCCESS;
     }
 
     @RequestMapping("/all")

@@ -109,5 +109,4 @@ function removeUser() {
 }
 
 function search() {
-    $('#userTable').DataTable().url().ajax
 }

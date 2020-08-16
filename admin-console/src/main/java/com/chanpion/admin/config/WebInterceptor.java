@@ -1,7 +1,10 @@
 package com.chanpion.admin.config;
 
+import com.chanpion.admin.system.auth.ShiroConfig;
 import com.chanpion.admin.system.entity.Menu;
 import com.chanpion.admin.system.entity.User;
+import com.chanpion.admin.system.utils.ShiroUtil;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +32,16 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
-            User user = new User();
-            user.setUsername("April Chen");
-            user.setImage("dist/img/user2-160x160.jpg");
+            User user = ShiroUtil.getCurrentUser();
+            if (user == null) {
+                user = new User();
+                user.setUsername("April Chen");
+                user.setImage("dist/img/user2-160x160.jpg");
+                modelAndView.addObject("user", user);
+            }
+            if (user.getImage() == null) {
+                user.setImage("dist/img/user2-160x160.jpg");
+            }
             modelAndView.addObject("user", user);
 
             Menu menuTree = new Menu("菜单");
@@ -39,7 +49,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
             List<Menu> children = new ArrayList<>();
             children.add(new Menu("菜单管理", "/menu"));
             children.add(new Menu("用户管理", "/user"));
-            children.add(new Menu("权限管理"));
+            children.add(new Menu("权限管理", "/role"));
             systemMenu.setChildren(children);
 
             List<Menu> menus = new ArrayList<>();

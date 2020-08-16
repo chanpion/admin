@@ -16,4 +16,20 @@
         VALUES
         (#{name}, #{url}, #{icon}, #{orderNumber})
     </insert>
+
+    <update id="update" parameterType="menu">
+        UPDATE menu
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="icon != null">
+                icon=#{icon},
+            </if>
+            <if test="url != null">
+                url=#{url},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
 </mapper>

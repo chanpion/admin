@@ -37,6 +37,14 @@ public interface BaseDAO<T> {
     int delete(T item);
 
     /**
+     * 根据id删除数据
+     *
+     * @param id 数据库id
+     * @return 删除条数
+     */
+    int deleteById(Long id);
+
+    /**
      * 查询列表
      *
      * @param item 条件

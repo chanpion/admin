@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.utils;
 
+import com.chanpion.admin.system.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -48,5 +49,9 @@ public class ShiroUtil {
      */
     public static boolean isLogin() {
         return SecurityUtils.getSubject().getPrincipal() != null;
+    }
+
+    public static User getCurrentUser(){
+        return (User) SecurityUtils.getSubject().getSession().getAttribute("user");
     }
 }

@@ -9,10 +9,10 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>admin-console</module>
-        <module>admin-system</module>
         <module>admin-common</module>
         <module>admin-search</module>
+        <module>admin-system</module>
+        <module>admin-console</module>
     </modules>
 
     <properties>
@@ -57,4 +57,17 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://maven.aliyun.com/repository/spring</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
