@@ -8,7 +8,8 @@ let treeSetting = {
         addHoverDom: addHoverDom,
         removeHoverDom: removeHoverDom,
         editHoverDom: editHoverDom,
-        selectedMulti: false
+        selectedMulti: false,
+        showIcon: true
     },
     edit: {
         enable: true,
@@ -112,15 +113,13 @@ function onRename(e, treeId, treeNode, isCancel) {
 
 
 function getTime() {
-    var now = new Date(),
+    const now = new Date(),
         h = now.getHours(),
         m = now.getMinutes(),
         s = now.getSeconds(),
         ms = now.getMilliseconds();
     return (h + ":" + m + ":" + s + " " + ms);
 }
-
-let newCount = 1;
 
 function addHoverDom(treeId, treeNode) {
     let sObj = $("#" + treeNode.tId + "_span");
@@ -131,9 +130,7 @@ function addHoverDom(treeId, treeNode) {
     let btn = $("#addBtn_" + treeNode.tId);
     if (btn) btn.bind("click", function () {
         $('#menu-div').show();
-        $('#menuForm').reset();
-        // let zTree = $.fn.zTree.getZTreeObj("menuTree");
-        // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+        document.getElementById('menuForm').reset()
         return false;
     });
 };
@@ -149,16 +146,6 @@ function removeHoverDom(treeId, treeNode) {
 function onCancel() {
     $("#addMenu").modal("hide");
     $('#menu-div').hide();
-}
-
-function addMenu(form) {
-    alert(form);
-    $('#addMenuForm').form('submit', {
-        url: '/menu/add',
-        success: function (data) {
-            alert(data);
-        }
-    });
 }
 
 function previewIcon() {
@@ -179,6 +166,7 @@ function save() {
         data: $('#menuForm').serialize(),
         success: function (data) {
             if (data.statusCode === 0) {
+                $('#menu-div').hide();
                 loadMenuTree();
             }
         },

@@ -5,12 +5,12 @@ spring:
     name: admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://172.19.80.206:3305/test?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-#    username: dialog
-#    password: dialog
-    url: jdbc:mysql://127.0.0.1:3306/admin?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: root
+    url: jdbc:mysql://172.19.80.206:3305/test?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: dialog
+    password: dialog
+#    url: jdbc:mysql://127.0.0.1:3306/admin?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#    username: root
+#    password: root
   freemarker:
     suffix: .html
     settings:
