@@ -49,6 +49,7 @@ public class MenuController {
     @RequestMapping("/remove/{id}")
     @ResponseBody
     public BaseResponse removeMenu(@PathVariable Long id) {
+        menuService.removeById(id);
         return BaseResponse.SUCCESS;
     }
 

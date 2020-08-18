@@ -12,9 +12,9 @@
     </select>
     <insert id="insert" parameterType="menu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-        menu(name,url,icon,order_number)
+        menu(name,url,icon,order_number,pid)
         VALUES
-        (#{name}, #{url}, #{icon}, #{orderNumber})
+        (#{name}, #{url}, #{icon}, #{orderNumber},#{pid})
     </insert>
 
     <update id="update" parameterType="menu">
@@ -32,4 +32,8 @@
         </set>
         WHERE id=#{id}
     </update>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM menu WHERE id=#{id}
+    </delete>
 </mapper>

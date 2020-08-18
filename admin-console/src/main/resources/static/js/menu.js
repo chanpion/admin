@@ -131,6 +131,8 @@ function addHoverDom(treeId, treeNode) {
     if (btn) btn.bind("click", function () {
         $('#menu-div').show();
         document.getElementById('menuForm').reset()
+        $("input[name='type']").val('add');
+        $("input[name='pid']").val(treeNode.id);
         return false;
     });
 };
@@ -165,13 +167,11 @@ function save() {
         type: 'POST',
         data: $('#menuForm').serialize(),
         success: function (data) {
-            if (data.statusCode === 0) {
-                $('#menu-div').hide();
-                loadMenuTree();
-            }
+            $('#menu-div').hide();
+            loadMenuTree();
         },
         error: function (data) {
-
+            alert('error: '+data)
         }
     });
 }
